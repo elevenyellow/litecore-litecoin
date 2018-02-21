@@ -123,6 +123,8 @@ public:
 
         // Note that of those with the service bits flag, most only support a subset of possible options
         vSeeds.push_back(CDNSSeedData("brennanmcdonald.io", "dnsseed.brennanmcdonald.io", true));
+        vSeeds.push_back(CDNSSeedData("rshaw.space", "dnsseed.rshaw.space", true));
+
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,38);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,5);
@@ -200,12 +202,12 @@ public:
         consensus.hashGenesisBlock = genesis.GetHash();
         assert(consensus.hashGenesisBlock == uint256S("0xe99da841b29de092a847214f1af5abf6ef38a50f607081b09692177555e5855e"));
         assert(genesis.hashMerkleRoot == uint256S("0xc33614a63c5382f71967c273f8f573faa5b09ed87620ea89504982118bd5e5b5"));
-        
+
 
         vFixedSeeds.clear();
         vSeeds.clear();
         // nodes with support for servicebits filtering should be at the top
-        vSeeds.push_back(CDNSSeedData("brennanmcdonald.io", "dnsseed.brennanmcdonald.io", true));
+        vSeeds.push_back(CDNSSeedData("brennanmcdonald.io", "dnsseed-testnet.brennanmcdonald.io", true));
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,111);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,196);
@@ -284,7 +286,6 @@ public:
         vFixedSeeds.clear(); //!< Regtest mode doesn't have any fixed seeds.
 
         vSeeds.clear();      //!< Regtest mode doesn't have any DNS seeds.
-        vSeeds.push_back(CDNSSeedData("brennanmcdonald.io", "dnsseed.brennanmcdonald.io", true));
 
         fMiningRequiresPeers = false;
         fDefaultConsistencyChecks = true;
