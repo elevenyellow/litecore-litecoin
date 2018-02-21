@@ -54,6 +54,12 @@ public:
         MAX_BASE58_TYPES
     };
 
+    enum Constants
+    {
+        ALGO_ALLIUM = 10,
+        ALGO_SCRYPT = 20
+    };
+
     const Consensus::Params& GetConsensus() const { return consensus; }
     const CMessageHeader::MessageStartChars& MessageStart() const { return pchMessageStart; }
     int GetDefaultPort() const { return nDefaultPort; }
@@ -76,6 +82,15 @@ public:
     const std::vector<unsigned char>& Base58Prefix(Base58Type type) const { return base58Prefixes[type]; }
     const std::vector<SeedSpec6>& FixedSeeds() const { return vFixedSeeds; }
     const CCheckpointData& Checkpoints() const { return checkpointData; }
+
+    int GetPoWAlgo(int nHeight) const {
+        if (strNetworkID == CBaseChainParams::TESTNET && nHeight > 10){
+                return ALGO_ALLIUM ;
+        } else {
+            return ALGO_SCRYPT;
+        }
+    }
+
 protected:
     CChainParams() {}
 
