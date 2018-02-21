@@ -114,9 +114,8 @@ public:
 
         genesis = CreateGenesisBlock(1515002093, 3606002, 0x1e0ffff0, 1, 50 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock == uint256S("0xe99da841b29de092a847214f1af5abf6ef38a50f607081b09692177555e5855e"));
-        assert(genesis.hashMerkleRoot == uint256S("0xc33614a63c5382f71967c273f8f573faa5b09ed87620ea89504982118bd5e5b5"));
-
+        assert(consensus.hashGenesisBlock == uint256S("0x"));
+        assert(genesis.hashMerkleRoot == uint256S("0x"));
         // Note that of those with the service bits flag, most only support a subset of possible options
         vSeeds.push_back(CDNSSeedData("185.185.126.143", "185.185.126.143", true));
 
@@ -137,7 +136,7 @@ public:
 
 	checkpointData = (CCheckpointData) {
 		boost::assign::map_list_of
-			(  0, uint256S("0xe99da841b29de092a847214f1af5abf6ef38a50f607081b09692177555e5855e")),
+			(  0, uint256S("0x0")),
 			1515002093, // * UNIX timestamp of last checkpoint block
 			1,   // * total number of transactions between genesis and last checkpoint
 			//   (the tx=... number in the SetBestChain debug.log lines)
@@ -183,24 +182,25 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = 1517356801; // January 31st, 2018
 
         // The best chain should have at least this much work.
-        consensus.nMinimumChainWork = uint256S("0x00000000000000000000000000000000000000000000000000000000872d04d7");
+        consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000000000000000000000000");
 
         pchMessageStart[0] = 0xfd;
         pchMessageStart[1] = 0xd2;
         pchMessageStart[2] = 0xc8;
         pchMessageStart[3] = 0xf1;
-        nDefaultPort = 19335;
+        nDefaultPort = 42075;
         nPruneAfterHeight = 1000;
 
-        genesis = CreateGenesisBlock(1514882685, 0, 0x1e0ffff0, 1, 50 * COIN);
+        genesis = CreateGenesisBlock(1514882685, 3606002, 0x1e0ffff0, 1, 50 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock == uint256S("0x"));
-        assert(genesis.hashMerkleRoot == uint256S("0x"));
+        assert(consensus.hashGenesisBlock == uint256S("0xe99da841b29de092a847214f1af5abf6ef38a50f607081b09692177555e5855e"));
+        assert(genesis.hashMerkleRoot == uint256S("0xc33614a63c5382f71967c273f8f573faa5b09ed87620ea89504982118bd5e5b5"));
+
 
         vFixedSeeds.clear();
         vSeeds.clear();
         // nodes with support for servicebits filtering should be at the top
-        vSeeds.push_back(CDNSSeedData("TESTNET SEED DOMAIN", "TESTNET SEED DOMAIN", true));
+        vSeeds.push_back(CDNSSeedData("brennanmcdonald.io", "dnsseed.brennanmcdonald.io", true));
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,111);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,196);
@@ -220,10 +220,10 @@ public:
 
         checkpointData = (CCheckpointData) {
             boost::assign::map_list_of
-            ( 0, uint256S("0xe99da841b29de092a847214f1af5abf6ef38a50f607081b09692177555e5855e"))
-            // 1487036370,
-            // 2057,
-            // 576
+            ( 0, uint256S("0xe99da841b29de092a847214f1af5abf6ef38a50f607081b09692177555e5855e")),
+            1515002093,
+            1,
+            0.00
         };
 
     }
@@ -270,12 +270,16 @@ public:
         nDefaultPort = 19444;
         nPruneAfterHeight = 1000;
 
-        genesis = CreateGenesisBlock(1514882685, 0, 0x207fffff, 1, 50 * COIN);
+        genesis = CreateGenesisBlock(1515002093, 3606002, 0x1e0ffff0, 1, 50 * COIN)
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock == uint256S("0x"));
-        assert(genesis.hashMerkleRoot == uint256S("0x"));
+        assert(consensus.hashGenesisBlock == uint256S("0xe99da841b29de092a847214f1af5abf6ef38a50f607081b09692177555e5855e"));
+        assert(genesis.hashMerkleRoot == uint256S("0xc33614a63c5382f71967c273f8f573faa5b09ed87620ea89504982118bd5e5b5"));
+
+
         vFixedSeeds.clear(); //!< Regtest mode doesn't have any fixed seeds.
+
         vSeeds.clear();      //!< Regtest mode doesn't have any DNS seeds.
+        vSeeds.push_back(CDNSSeedData("brennanmcdonald.io", "dnsseed.brennanmcdonald.io", true));
 
         fMiningRequiresPeers = false;
         fDefaultConsistencyChecks = true;
@@ -286,9 +290,9 @@ public:
 	checkpointData = (CCheckpointData){
 		boost::assign::map_list_of
 			( 0, uint256S("0f9188f13cb7b2c71f2a335e3a4fc328bf5beb436012afca590b1a11466e2206")),
-			0,
-			0,
-			0
+      1515002093,
+      1,
+      0
 	};
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,111);
