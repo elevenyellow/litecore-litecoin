@@ -198,16 +198,15 @@ public:
         nDefaultPort = 42075;
         nPruneAfterHeight = 1000;
 
-        genesis = CreateGenesisBlock(1514882685, 3606002, 0x1e0ffff0, 1, 50 * COIN);
+        genesis = CreateGenesisBlock(1516729643, 1047651, 0x1e0ffff0, 1, 50 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock == uint256S("0xe99da841b29de092a847214f1af5abf6ef38a50f607081b09692177555e5855e"));
-        assert(genesis.hashMerkleRoot == uint256S("0xc33614a63c5382f71967c273f8f573faa5b09ed87620ea89504982118bd5e5b5"));
-
+        assert(consensus.hashGenesisBlock == uint256S("0xb25004ec2dc27689999f9ee14856ee0464d7f73f3fae3cf43c1d40f89c141aea"));
+        assert(genesis.hashMerkleRoot == uint256S("0x5f32b33db6dcab182dfad55b3d04b2978c1598cf82519835e000dd77e37f3aa8"));
 
         vFixedSeeds.clear();
         vSeeds.clear();
         // nodes with support for servicebits filtering should be at the top
-        vSeeds.push_back(CDNSSeedData("brennanmcdonald.io", "dnsseed-testnet.brennanmcdonald.io", true));
+        // vSeeds.push_back(CDNSSeedData("brennanmcdonald.io", "dnsseed-testnet.brennanmcdonald.io", true));
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,111);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,196);
@@ -227,8 +226,8 @@ public:
 
         checkpointData = (CCheckpointData) {
             boost::assign::map_list_of
-            ( 0, uint256S("0xe99da841b29de092a847214f1af5abf6ef38a50f607081b09692177555e5855e")),
-            1515002093,
+            ( 0, uint256S("0xb25004ec2dc27689999f9ee14856ee0464d7f73f3fae3cf43c1d40f89c141aea")),
+            1516729643,
             1,
             0.00
         };
