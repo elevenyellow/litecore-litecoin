@@ -27,7 +27,7 @@ uint256 CBlockHeader::GetPoWHash() const
   	int64_t nChainStartTime = 1515925970;
 
   	// n-factor will change every this interval is hit
-  	int64_t nChangeInterval = 36288000; //200 days
+  	int64_t nChangeInterval = 36288000; // 420 days
     if (GetBlockTime() <= nChainStartTime) {
   		Nfactor = minNfactor;
   	} else {
