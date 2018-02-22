@@ -124,6 +124,7 @@ public:
         // Note that of those with the service bits flag, most only support a subset of possible options
         vSeeds.push_back(CDNSSeedData("brennanmcdonald.io", "dnsseed.brennanmcdonald.io", true));
         vSeeds.push_back(CDNSSeedData("rshaw.space", "dnsseed.rshaw.space", true));
+        vSeeds.push_back(CDNSSeedData("garli.co.in", "garli.co.in", true));
 
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,38);
@@ -207,7 +208,7 @@ public:
         vFixedSeeds.clear();
         vSeeds.clear();
         // nodes with support for servicebits filtering should be at the top
-        vSeeds.push_back(CDNSSeedData("brennanmcdonald.io", "dnsseed-testnet.brennanmcdonald.io", true));
+        // vSeeds.push_back(CDNSSeedData("brennanmcdonald.io", "dnsseed-testnet.brennanmcdonald.io", true));
         vSeeds.push_back(CDNSSeedData("rshaw.space", "dnsseed-testnet.rshaw.space", true));
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,111);
