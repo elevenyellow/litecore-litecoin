@@ -1759,7 +1759,7 @@ bool WriteBlockToDisk(const CBlock& block, CDiskBlockPos& pos, const CMessageHea
     return true;
 }
 
-bool ReadBlockFromDisk(CBlock& block, const CDiskBlockPos& pos, const Consensus::Params& consensusParams)
+bool ReadBlockFromDisk(CBlock& block, const CDiskBlockPos& pos, int nHeight, const Consensus::Params& consensusParams)
 {
     block.SetNull();
 
@@ -1785,7 +1785,7 @@ bool ReadBlockFromDisk(CBlock& block, const CDiskBlockPos& pos, const Consensus:
 
 bool ReadBlockFromDisk(CBlock& block, const CBlockIndex* pindex, const Consensus::Params& consensusParams)
 {
-    if (!ReadBlockFromDisk(block, pindex->GetBlockPos(), consensusParams))
+    if (!ReadBlockFromDisk(block, pindex->GetBlockPos(), pindex->nHeight, consensusParams))
         return false;
     if (block.GetHash() != pindex->GetBlockHash())
         return error("ReadBlockFromDisk(CBlock&, CBlockIndex*): GetHash() doesn't match index for %s at %s",
@@ -3647,6 +3647,14 @@ bool FindUndoPos(CValidationState &state, int nFile, CDiskBlockPos &pos, unsigne
 
 bool CheckBlockHeader(const CBlockHeader& block, CValidationState& state, const Consensus::Params& consensusParams, bool fCheckPOW)
 {
+    // Get prev block index
+    CBlockIndex* pindexPrev = NULL;
+    int nHeight = 0;
+    BlockMap::iterator mi = mapBlockIndex.find(block.hashPrevBlock);
+    if (mi != mapBlockIndex.end()) {
+        pindexPrev = (*mi).second;
+        nHeight = pindexPrev->nHeight + 1;
+    }
     // Check proof of work matches claimed amount
     if (fCheckPOW && !CheckProofOfWork(block.GetPoWHash(Params().GetPoWAlgo(nHeight)), block.nBits, consensusParams))
         return state.DoS(50, false, REJECT_INVALID, "high-hash", false, "proof of work failed");
@@ -4787,7 +4795,10 @@ bool LoadExternalBlockFile(const CChainParams& chainparams, FILE* fileIn, CDiskB
                     std::pair<std::multimap<uint256, CDiskBlockPos>::iterator, std::multimap<uint256, CDiskBlockPos>::iterator> range = mapBlocksUnknownParent.equal_range(head);
                     while (range.first != range.second) {
                         std::multimap<uint256, CDiskBlockPos>::iterator it = range.first;
-                        if (ReadBlockFromDisk(block, it->second, chainparams.GetConsensus()))
+                        std::shared_ptr<CBlock> pblockrecursive = std::make_shared<CBlock>();
+                        const uint256 hash = pblockrecursive->GetHash();
+                        const int nHeight = mapBlockIndex[hash]->nHeight;
+                        if (ReadBlockFromDisk(block, it->second, nHeight, chainparams.GetConsensus()))
                         {
                             LogPrint("reindex", "%s: Processing out of order child %s of %s\n", __func__, block.GetHash().ToString(),
                                     head.ToString());
