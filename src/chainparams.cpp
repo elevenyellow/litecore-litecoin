@@ -122,7 +122,7 @@ public:
         assert(genesis.hashMerkleRoot == uint256S("0x5f32b33db6dcab182dfad55b3d04b2978c1598cf82519835e000dd77e37f3aa8"));
 
         // Note that of those with the service bits flag, most only support a subset of possible options
-        vSeeds.push_back(CDNSSeedData("brennanmcdonald.io", "dnsseed.brennanmcdonald.io", true));
+        // vSeeds.push_back(CDNSSeedData("brennanmcdonald.io", "dnsseed.brennanmcdonald.io", true));
         vSeeds.push_back(CDNSSeedData("rshaw.space", "dnsseed.rshaw.space", true));
         vSeeds.push_back(CDNSSeedData("garli.co.in", "garli.co.in", true));
 
@@ -279,10 +279,10 @@ public:
         nDefaultPort = 19444;
         nPruneAfterHeight = 1000;
 
-        genesis = CreateGenesisBlock(1515002093, 3606002, 0x1e0ffff0, 1, 50 * COIN)
+        genesis = CreateGenesisBlock(1515002093, 3606002, 0x1e0ffff0, 1, 50 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock == uint256S("0xe99da841b29de092a847214f1af5abf6ef38a50f607081b09692177555e5855e"));
-        assert(genesis.hashMerkleRoot == uint256S("0xc33614a63c5382f71967c273f8f573faa5b09ed87620ea89504982118bd5e5b5"));
+        // assert(consensus.hashGenesisBlock == uint256S("0xe99da841b29de092a847214f1af5abf6ef38a50f607081b09692177555e5855e"));
+        // assert(genesis.hashMerkleRoot == uint256S("0xc33614a63c5382f71967c273f8f573faa5b09ed87620ea89504982118bd5e5b5"));
 
 
         vFixedSeeds.clear(); //!< Regtest mode doesn't have any fixed seeds.
@@ -295,13 +295,13 @@ public:
         fMineBlocksOnDemand = true;
         fTestnetToBeDeprecatedFieldRPC = false;
 
-	checkpointData = (CCheckpointData){
-		boost::assign::map_list_of
-			( 0, uint256S("0f9188f13cb7b2c71f2a335e3a4fc328bf5beb436012afca590b1a11466e2206")),
-      1515002093,
-      1,
-      0
-	};
+      	checkpointData = (CCheckpointData){
+      		boost::assign::map_list_of
+      			( 0, uint256S("0f9188f13cb7b2c71f2a335e3a4fc328bf5beb436012afca590b1a11466e2206")),
+            1515002093,
+            1,
+            0
+      	};
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,111);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,196);
@@ -317,6 +317,8 @@ public:
         consensus.vDeployments[d].nTimeout = nTimeout;
     }
 };
+
+
 static CRegTestParams regTestParams;
 
 static CChainParams *pCurrentParams = 0;
